@@ -7,9 +7,13 @@ import kotlinx.parcelize.Parcelize
 
 
 @Parcelize
-@Entity(tableName = "artists")
+@Entity(tableName = "items")
 data class ItemsEntity(
     @PrimaryKey(autoGenerate = true)
-    val ArtistId:Int,
-    val Name:String,
+    val itemId:Int,
+    val client:String?,
+    val boxNumber:String?,
+    val code:String?,
+    val itemName:String?,
+    val brandName:String?,
 ):Parcelable

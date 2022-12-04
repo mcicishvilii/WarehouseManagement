@@ -6,7 +6,7 @@ import kotlinx.coroutines.flow.Flow
 
 @Dao
 interface ItemsDao {
-    @Query("SELECT * FROM artists")
+    @Query("SELECT * FROM items")
     fun getAll(): Flow<List<ItemsEntity>>
 
     @Insert(onConflict = OnConflictStrategy.REPLACE)
@@ -18,7 +18,7 @@ interface ItemsDao {
     @Update
     fun updateItem(task: ItemsEntity)
 
-    @Query("DELETE FROM artists")
+    @Query("DELETE FROM items")
     fun deleteAll()
 
 

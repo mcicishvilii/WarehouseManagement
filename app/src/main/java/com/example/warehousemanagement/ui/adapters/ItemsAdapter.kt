@@ -37,7 +37,10 @@ class ItemsAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemCode.text = model?.Name
+                binding.tvItemCode.text = model?.code
+                binding.tvBrand.text = model?.brandName
+                binding.tvBoxQuentity.text = model?.boxNumber
+                binding.tvOrderNumber.text = model?.client
             }
             binding.tvItemCode.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
@@ -63,7 +66,7 @@ class NewsDiffCallBack :
         oldItem: ItemsEntity,
         newItem: ItemsEntity
     ): Boolean {
-        return oldItem.ArtistId== newItem.ArtistId
+        return oldItem.itemId== newItem.itemId
     }
 
     override fun areContentsTheSame(
