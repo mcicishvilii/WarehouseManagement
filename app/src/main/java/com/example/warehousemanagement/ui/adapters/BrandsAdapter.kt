@@ -1,79 +1,79 @@
-//package com.example.warehousemanagement.ui.adapters
-//
-//import android.view.LayoutInflater
-//import android.view.ViewGroup
-//import androidx.navigation.findNavController
-//import androidx.recyclerview.widget.DiffUtil
-//import androidx.recyclerview.widget.ListAdapter
-//import androidx.recyclerview.widget.RecyclerView
-//import com.example.mishokeepclone.data.TaskEntity
-//import com.example.mishokeepclone.databinding.SingletasklayoutBinding
-//import com.example.mishokeepclone.ui.screens.dashboard.DashboardFragmentDirections
-//
-//class TasksAdapter  :
-//    ListAdapter<TaskEntity, TasksAdapter.TasksViewHolder>(
-//        NewsDiffCallBack()
-//    ) {
-//
-//    private lateinit var itemClickListener: (TaskEntity, Int) -> Unit
-//
-//    override fun onCreateViewHolder(
-//        parent: ViewGroup, viewType: Int
-//    ): TasksViewHolder {
-//        val binding =
-//            SingletasklayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-//        return TasksViewHolder(binding)
-//    }
-//
-//
-//    override fun onBindViewHolder(holder: TasksViewHolder, position: Int) {
-//        holder.bindData()
-//    }
-//
-//    inner class TasksViewHolder(private val binding: SingletasklayoutBinding) :
-//        RecyclerView.ViewHolder(binding.root) {
-//        private var model: TaskEntity? = null
-//
-//        fun bindData() {
-//            model = getItem(adapterPosition)
-//            binding.apply {
-//                tvTitle.text = model?.title
-//                tvDescription.text = model?.taskDescription
-//                binding.priority.text = model?.priority
-//            }
-//            binding.mainlayout.setOnLongClickListener {
-//                itemClickListener.invoke(model!!, adapterPosition)
-//                true
-//            }
-//
-//            binding.mainlayout.setOnClickListener {
-//                val action = DashboardFragmentDirections.actionDashboardFragmentToUpdateFragment(model!!)
-//                binding.mainlayout.findNavController().navigate(action)
-//            }
-//        }
-//    }
-//
-//    fun setOnItemClickListener(clickListener: (TaskEntity, Int) -> Unit) {
-//        itemClickListener = clickListener
-//    }
-//
-//}
-//
-//class NewsDiffCallBack :
-//    DiffUtil.ItemCallback<TaskEntity>() {
-//    override fun areItemsTheSame(
-//        oldItem: TaskEntity,
-//        newItem: TaskEntity
-//    ): Boolean {
-//        return oldItem.taskid== newItem.taskid
-//    }
-//
-//    override fun areContentsTheSame(
-//        oldItem: TaskEntity,
-//        newItem: TaskEntity
-//    ): Boolean {
-//        return oldItem == newItem
-//    }
-//
-//
-//}
+package com.example.warehousemanagement.ui.adapters
+
+import android.view.LayoutInflater
+import android.view.ViewGroup
+import androidx.navigation.findNavController
+import androidx.recyclerview.widget.DiffUtil
+import androidx.recyclerview.widget.ListAdapter
+import androidx.recyclerview.widget.RecyclerView
+import com.example.warehousemanagement.data.model.ItemsEntity
+import com.example.warehousemanagement.databinding.SingleBrandLayoutBinding
+import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
+import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
+
+class BrandsAdapter  :
+    ListAdapter<ItemsEntity, BrandsAdapter.BrandsViewHolder>(
+        BrandsDiffCallback()
+    ) {
+
+    private lateinit var itemClickListener: (ItemsEntity, Int) -> Unit
+
+    override fun onCreateViewHolder(
+        parent: ViewGroup, viewType: Int
+    ): BrandsViewHolder {
+        val binding =
+            SingleBrandLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+        return BrandsViewHolder(binding)
+    }
+
+
+    override fun onBindViewHolder(holder: BrandsViewHolder, position: Int) {
+        holder.bindData()
+    }
+
+    inner class BrandsViewHolder(private val binding: SingleBrandLayoutBinding) :
+        RecyclerView.ViewHolder(binding.root) {
+        private var model: ItemsEntity? = null
+
+        fun bindData() {
+            model = getItem(adapterPosition)
+            binding.apply {
+                binding.tvBrandName.text = model?.brandName
+                binding.tvBoxQuanntity.text = model?.boxNumber.toString()
+            }
+            binding.tvBrandName.setOnLongClickListener {
+                itemClickListener.invoke(model!!, adapterPosition)
+                true
+            }
+
+            binding.tvBrandName.setOnClickListener {
+                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment(model!!)
+                binding.tvBrandName.findNavController().navigate(action)
+            }
+        }
+    }
+
+    fun setOnItemClickListener(clickListener: (ItemsEntity, Int) -> Unit) {
+        itemClickListener = clickListener
+    }
+
+}
+
+class BrandsDiffCallback :
+    DiffUtil.ItemCallback<ItemsEntity>() {
+    override fun areItemsTheSame(
+        oldItem: ItemsEntity,
+        newItem: ItemsEntity
+    ): Boolean {
+        return oldItem.itemId== newItem.itemId
+    }
+
+    override fun areContentsTheSame(
+        oldItem: ItemsEntity,
+        newItem: ItemsEntity
+    ): Boolean {
+        return oldItem == newItem
+    }
+
+
+}

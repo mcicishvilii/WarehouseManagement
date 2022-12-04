@@ -14,6 +14,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.R
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
+import com.example.warehousemanagement.ui.adapters.BrandsAdapter
 import com.example.warehousemanagement.ui.adapters.ItemsAdapter
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -22,7 +23,7 @@ import kotlinx.coroutines.launch
 @AndroidEntryPoint
 class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
-    private val itemsAdapter: ItemsAdapter by lazy { ItemsAdapter() }
+    private val itemsAdapter: BrandsAdapter by lazy { BrandsAdapter() }
     private val vm: DashboardViewModel by viewModels()
 
     override fun viewCreated() {

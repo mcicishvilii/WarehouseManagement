@@ -18,4 +18,8 @@ class DashboardViewModel @Inject constructor(
     fun getTasks(): Flow<List<ItemsEntity>> {
         return tasksRepo.getItems()
     }
+
+    fun getFilteredItems(query:String): Flow<List<ItemsEntity>> {
+        return tasksRepo.getFilteredItems(query)
+    }
 }

@@ -21,5 +21,7 @@ interface ItemsDao {
     @Query("DELETE FROM items")
     fun deleteAll()
 
+    @Query("SELECT * FROM items WHERE brandName LIKE :searchQuery")
+    fun searchDatabase(searchQuery: String): Flow<List<ItemsEntity>>
 
 }

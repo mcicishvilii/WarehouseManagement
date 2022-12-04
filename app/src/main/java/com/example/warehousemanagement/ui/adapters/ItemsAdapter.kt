@@ -39,7 +39,7 @@ class ItemsAdapter  :
             binding.apply {
                 binding.tvItemCode.text = model?.code
                 binding.tvBrand.text = model?.brandName
-                binding.tvBoxQuentity.text = model?.boxNumber
+                binding.tvBoxQuentity.text = model?.boxNumber.toString()
                 binding.tvOrderNumber.text = model?.client
             }
             binding.tvItemCode.setOnLongClickListener {
@@ -47,10 +47,10 @@ class ItemsAdapter  :
                 true
             }
 
-            binding.tvItemCode.setOnClickListener {
-                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment()
-                binding.tvItemCode.findNavController().navigate(action)
-            }
+//            binding.tvItemCode.setOnClickListener {
+//                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment()
+//                binding.tvItemCode.findNavController().navigate(action)
+//            }
         }
     }
 

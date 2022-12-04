@@ -18,5 +18,9 @@
         android:id="@+id/itemsFragment"
         android:name="com.example.warehousemanagement.ui.screens.items.ItemsFragment"
         android:label="fragment_items"
-        tools:layout="@layout/fragment_items" />
+        tools:layout="@layout/fragment_items" >
+        <argument
+            android:name="itemInfo"
+            app:argType="com.example.warehousemanagement.data.model.ItemsEntity" />
+    </fragment>
 </navigation>

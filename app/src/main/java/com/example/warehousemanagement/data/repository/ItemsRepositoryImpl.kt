@@ -13,6 +13,10 @@ class ItemsRepositoryImpl @Inject constructor(
         return itemsDao.getAll()
     }
 
+    override fun getFilteredItems(query:String): Flow<List<ItemsEntity>> {
+        return itemsDao.searchDatabase(query)
+    }
+
     override suspend fun insertItem(item: ItemsEntity) {
         return itemsDao.insert(item)
     }
