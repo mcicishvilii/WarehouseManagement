@@ -30,4 +30,19 @@
         app:layout_constraintEnd_toEndOf="parent" />
 
 
+    <androidx.appcompat.widget.AppCompatButton
+
+        android:id="@+id/saveButton"
+        android:layout_width="wrap_content"
+        android:layout_height="60dp"
+        android:layout_marginBottom="40dp"
+        android:text="save to csv"
+        android:layout_marginStart="30dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_baseline_done_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

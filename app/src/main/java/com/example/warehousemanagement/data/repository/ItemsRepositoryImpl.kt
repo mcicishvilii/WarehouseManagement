@@ -22,12 +22,10 @@ class ItemsRepositoryImpl @Inject constructor(
     }
 
     override suspend fun deleteItem(item: ItemsEntity) {
-
         return itemsDao.delete(item)
     }
 
     override suspend fun deleteAll() {
-
         return itemsDao.deleteAll()
     }
 

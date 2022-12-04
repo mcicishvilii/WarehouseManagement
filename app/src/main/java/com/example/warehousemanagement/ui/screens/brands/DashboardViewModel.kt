@@ -12,14 +12,20 @@ import javax.inject.Inject
 
 @HiltViewModel
 class DashboardViewModel @Inject constructor(
-    private val tasksRepo: ItemsRepositoryImpl,
+    private val itemsRepo: ItemsRepositoryImpl,
 ) : ViewModel() {
 
     fun getTasks(): Flow<List<ItemsEntity>> {
-        return tasksRepo.getItems()
+        return itemsRepo.getItems()
     }
 
     fun getFilteredItems(query:String): Flow<List<ItemsEntity>> {
-        return tasksRepo.getFilteredItems(query)
+        return itemsRepo.getFilteredItems(query)
+    }
+
+    fun deleteItem(item: ItemsEntity) {
+        CoroutineScope(Dispatchers.IO).launch {
+            itemsRepo.deleteItem(item)
+        }
     }
 }
