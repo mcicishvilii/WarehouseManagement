@@ -17,4 +17,17 @@
         />
 
 
+    <androidx.appcompat.widget.AppCompatImageButton
+
+        android:id="@+id/addNutton"
+        android:layout_width="60dp"
+        android:layout_height="60dp"
+        android:layout_marginEnd="30dp"
+        android:layout_marginBottom="40dp"
+        android:elevation="10dp"
+        android:src="@drawable/ic_baseline_done_24"
+        app:layout_constraintBottom_toBottomOf="parent"
+        app:layout_constraintEnd_toEndOf="parent" />
+
+
 </androidx.constraintlayout.widget.ConstraintLayout>

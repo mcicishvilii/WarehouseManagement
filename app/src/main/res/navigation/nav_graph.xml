@@ -13,6 +13,9 @@
         <action
             android:id="@+id/action_dashboardFragment_to_itemsFragment"
             app:destination="@id/itemsFragment" />
+        <action
+            android:id="@+id/action_dashboardFragment_to_addTaskFragment"
+            app:destination="@id/addTaskFragment" />
     </fragment>
     <fragment
         android:id="@+id/itemsFragment"
@@ -22,5 +25,14 @@
         <argument
             android:name="itemInfo"
             app:argType="com.example.warehousemanagement.data.model.ItemsEntity" />
+    </fragment>
+    <fragment
+        android:id="@+id/addTaskFragment"
+        android:name="com.example.warehousemanagement.ui.screens.add.AddProductFragment"
+        android:label="fragment_add_task"
+        tools:layout="@layout/fragment_add_product" >
+        <action
+            android:id="@+id/action_addTaskFragment_to_dashboardFragment"
+            app:destination="@id/dashboardFragment" />
     </fragment>
 </navigation>

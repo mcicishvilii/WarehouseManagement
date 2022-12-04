@@ -10,6 +10,7 @@ import androidx.fragment.app.viewModels
 import androidx.lifecycle.Lifecycle
 import androidx.lifecycle.lifecycleScope
 import androidx.lifecycle.repeatOnLifecycle
+import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.R
 import com.example.warehousemanagement.common.BaseFragment
@@ -31,10 +32,15 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboa
     }
 
     override fun listeners() {
-
+        goToAdd()
     }
 
 
+    private fun goToAdd(){
+        binding.addNutton.setOnClickListener {
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAddTaskFragment())
+        }
+    }
 
     private fun getItems() {
         setupRecycler()

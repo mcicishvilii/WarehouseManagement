@@ -22,9 +22,7 @@ object DBmodule {
         return Room.databaseBuilder(
             context,
             DataBase::class.java,"sample.db"
-        ).createFromAsset("database/sample.db")
-            .fallbackToDestructiveMigration()
-            .build()
+        ).fallbackToDestructiveMigration().build()
     }
 
     @Singleton
