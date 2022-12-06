@@ -1,6 +1,7 @@
 package com.example.warehousemanagement.ui.screens.brands
 
 import androidx.lifecycle.ViewModel
+import androidx.lifecycle.viewModelScope
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.data.repository.ItemsRepositoryImpl
 import dagger.hilt.android.lifecycle.HiltViewModel
@@ -26,6 +27,12 @@ class DashboardViewModel @Inject constructor(
     fun deleteItem(item: ItemsEntity) {
         CoroutineScope(Dispatchers.IO).launch {
             itemsRepo.deleteItem(item)
+        }
+    }
+
+    fun toCsv(){
+        CoroutineScope(Dispatchers.IO).launch {
+            itemsRepo.createCSV()
         }
     }
 }

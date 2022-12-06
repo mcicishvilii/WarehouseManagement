@@ -1,5 +1,6 @@
 package com.example.warehousemanagement.data.repository
 
+import android.util.Log
 import com.example.warehousemanagement.data.db.ItemsDao
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.domain.repository.ItemsRepository
@@ -31,6 +32,23 @@ class ItemsRepositoryImpl @Inject constructor(
 
     override suspend fun updateItem(item: ItemsEntity) {
         return itemsDao.updateItem(item)
+    }
+
+    override suspend fun createCSV() {
+
+        val sb = StringBuilder()
+        var afterFirst = false
+        sb.append("{POSTDATALOCAL}")
+        for (s in itemsDao.getPostDataLocalCSV()) {
+            if(afterFirst) sb.append(",")
+            afterFirst = true
+            sb.append(s)
+        }
+        afterFirst = false
+        sb.append("{GROUPDATALOCAL}")
+
+        Log.d("CSV_DATA","CSV is :-\n\t$sb")
+
     }
 
 }

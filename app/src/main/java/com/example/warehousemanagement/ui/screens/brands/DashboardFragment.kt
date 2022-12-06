@@ -20,9 +20,7 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class DashboardFragment @Inject constructor(
-    private val itemsDao: ItemsDao,
-)  : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
+class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
     private val brandsAdapter: BrandsAdapter by lazy { BrandsAdapter() }
     private val vm: DashboardViewModel by viewModels()
@@ -39,8 +37,13 @@ class DashboardFragment @Inject constructor(
 
 
     private fun saveToCsv() {
-        
-
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                binding.saveButton.setOnClickListener {
+                    vm.toCsv()
+                }
+            }
+        }
     }
 
     private fun goToAdd(){
