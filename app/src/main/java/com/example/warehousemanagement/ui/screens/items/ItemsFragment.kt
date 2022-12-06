@@ -38,8 +38,6 @@ class ItemsFragment : BaseFragment<FragmentItemsBinding>(FragmentItemsBinding::i
 
     }
 
-
-
     private fun getItems() {
         setupRecycler()
         viewLifecycleOwner.lifecycleScope.launch {

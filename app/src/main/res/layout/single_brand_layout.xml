@@ -8,20 +8,42 @@
     android:id="@+id/mainLayoutBrands"
     >
 
+    <androidx.constraintlayout.widget.Guideline
+        android:id="@+id/firstGuideline"
+        android:layout_width="wrap_content"
+        android:layout_height="wrap_content"
+        android:orientation="vertical"
+        app:layout_constraintGuide_percent="0.285"
+        />
 
     <TextView
         android:id="@+id/tv_brand_name"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:text="brand name"
+        android:text="brand"
+        app:layout_constraintEnd_toEndOf="@id/firstGuideline"
+        android:background="@drawable/outline"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
     <TextView
+        android:id="@+id/tv_productName"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:text="produqti"
+        android:background="@drawable/outline"
+        android:layout_marginHorizontal="10dp"
+        app:layout_constraintStart_toEndOf="@id/firstGuideline"
+        app:layout_constraintEnd_toStartOf="@id/tv_box_quanntity"
+        app:layout_constraintTop_toTopOf="parent"
+        />
+
+    <TextView
         android:id="@+id/tv_box_quanntity"
-        android:layout_width="wrap_content"
+        android:layout_width="0dp"
         android:layout_height="wrap_content"
         android:text="20 boxes"
+        android:background="@drawable/outline"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintTop_toTopOf="parent" />
 
