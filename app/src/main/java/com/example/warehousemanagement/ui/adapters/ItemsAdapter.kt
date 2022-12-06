@@ -37,12 +37,12 @@ class ItemsAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemCode.text = model?.code
+                binding.tvItemName.text = model?.itemName
                 binding.tvBrand.text = model?.brandName
                 binding.tvBoxQuentity.text = model?.boxNumber.toString()
                 binding.tvOrderNumber.text = model?.client
             }
-            binding.tvItemCode.setOnLongClickListener {
+            binding.tvItemName.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
                 true
             }

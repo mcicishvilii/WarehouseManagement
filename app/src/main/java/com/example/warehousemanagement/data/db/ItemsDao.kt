@@ -24,4 +24,7 @@ interface ItemsDao {
     @Query("SELECT * FROM items WHERE brandName LIKE :searchQuery")
     fun searchDatabase(searchQuery: String): Flow<List<ItemsEntity>>
 
+    @Query("SELECT brandName||','||itemName FROM items")
+    fun getPostDataLocalCSV(): List<String>
+
 }

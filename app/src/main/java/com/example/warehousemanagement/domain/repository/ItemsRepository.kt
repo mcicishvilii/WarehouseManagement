@@ -15,4 +15,6 @@ interface ItemsRepository {
     suspend fun deleteAll()
 
     suspend fun updateItem(item:ItemsEntity)
+
+    suspend fun createCSV()
 }

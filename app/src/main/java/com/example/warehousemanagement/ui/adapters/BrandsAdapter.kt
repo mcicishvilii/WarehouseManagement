@@ -40,6 +40,7 @@ class BrandsAdapter  :
             binding.apply {
                 binding.tvBrandName.text = model?.brandName
                 binding.tvBoxQuanntity.text = model?.boxNumber.toString()
+                binding.tvProductName.text = model?.itemName.toString()
             }
             binding.mainLayoutBrands.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
