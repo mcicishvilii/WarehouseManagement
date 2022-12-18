@@ -1,10 +1,12 @@
 plugins {
     id 'com.android.application'
     id 'org.jetbrains.kotlin.android'
+    id 'androidx.navigation.safeargs.kotlin'
     id 'kotlin-kapt'
     id 'dagger.hilt.android.plugin'
     id 'kotlin-parcelize'
-    id 'androidx.navigation.safeargs.kotlin'
+    id 'com.google.gms.google-services'
+    id 'com.google.firebase.crashlytics'
 }
 
 android {
@@ -48,6 +50,26 @@ android {
 }
 
 dependencies {
+
+    implementation 'com.google.firebase:firebase-firestore-ktx'
+
+    def paging_version = "3.1.1"
+    implementation "androidx.paging:paging-runtime:$paging_version"
+
+    // reCaptha
+    implementation 'com.google.android.gms:play-services-safetynet:18.0.1'
+
+
+    // Import the BoM for the Firebase platform
+    implementation platform('com.google.firebase:firebase-bom:31.1.1')
+
+    // Add the dependency for the Realtime Database library
+    // When using the BoM, you don't specify versions in Firebase library dependencies
+    implementation 'com.google.firebase:firebase-database-ktx'
+
+    implementation 'com.google.firebase:firebase-messaging-ktx:23.0.8'
+    implementation 'com.google.firebase:firebase-crashlytics-ktx:18.3.1'
+    implementation 'com.google.firebase:firebase-analytics-ktx:21.2.0'
 
     // navigation
     implementation 'androidx.navigation:navigation-fragment-ktx:2.5.3'
