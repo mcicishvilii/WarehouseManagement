@@ -11,10 +11,14 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.db.ItemsDao
+import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
 import com.example.warehousemanagement.ui.adapters.BrandsAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
+import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
+import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
 import kotlinx.coroutines.launch
@@ -24,7 +28,8 @@ import javax.inject.Inject
 
 
 @AndroidEntryPoint
-class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
+class DashboardFragment :
+    BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
     private val brandsAdapter: BrandsAdapter by lazy { BrandsAdapter() }
     private val vm: DashboardViewModel by viewModels()
@@ -36,14 +41,13 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboa
 
     override fun listeners() {
         goToAdd()
-        delete()
         saveToCsv()
     }
 
 
     private fun saveToCsv() {
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+        viewLifecycleOwner.lifecycleScope.launch {
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 binding.saveButton.setOnClickListener {
                     vm.toCsv()
                 }
@@ -51,55 +55,48 @@ class DashboardFragment : BaseFragment<FragmentDashboardBinding>(FragmentDashboa
         }
     }
 
-    private fun goToAdd(){
+    private fun goToAdd() {
         binding.addNutton.setOnClickListener {
             findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToAddTaskFragment())
         }
     }
 
     private fun getItems() {
-        setupRecycler()
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
 //                vm.getTasks().collect() {
 //                    brandsAdapter.submitList(it)
 //                }
 
-                db.collection("products")
-                    .get()
-                    .addOnSuccessListener { result ->
-                        for (document in result) {
-                            Log.d(TAG, "${document.id   } => ${document.data}")
-                        }
-                    }
-                    .addOnFailureListener { exception ->
-                        Log.w(TAG, "Error getting documents.", exception)
-                    }
-
+        val source = Source.CACHE
+        db.collection("products").document("UIIII").get(source)
+            .addOnSuccessListener { docs ->
+                val brand = docs.toObject<Items>()
+                Log.d(TAG,brand?.brandName.toString())
+                binding.tvProductName.text = brand?.brandName.toString()
             }
-        }
-    }
-
-    private fun delete(){
-        brandsAdapter.apply {
-            setOnItemClickListener{ brand,_ ->
-                vm.deleteItem(brand)
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "Error getting documents.", exception)
             }
-        }
     }
 
-    private fun setupRecycler() {
-        binding.rvBrands.apply {
-            adapter = brandsAdapter
-            layoutManager =
-                LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-        }
-    }
+//    private fun delete(){
+//        brandsAdapter.apply {
+//            setOnItemClickListener{ brand,_ ->
+//                vm.deleteItem(brand)
+//            }
+//        }
+//    }
 
+//    private fun setupRecycler() {
+//        binding.rvBrands.apply {
+//            adapter = brandsAdapter
+//            layoutManager =
+//                LinearLayoutManager(
+//                    requireContext(),
+//                    LinearLayoutManager.VERTICAL,
+//                    false
+//                )
+//        }
+//    }
 
 
 }
