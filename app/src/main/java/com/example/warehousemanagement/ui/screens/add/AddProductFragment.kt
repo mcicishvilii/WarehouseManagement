@@ -1,26 +1,18 @@
 package com.example.warehousemanagement.ui.screens.add
 
-import android.os.Build
 import android.util.Log
-import androidx.annotation.RequiresApi
+import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
-import com.example.warehousemanagement.R
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.model.Items
-import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.databinding.FragmentAddProductBinding
 import com.google.firebase.firestore.FieldValue
-import com.google.firebase.firestore.FieldValue.serverTimestamp
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
-import java.text.SimpleDateFormat
-import java.time.Instant
-import java.time.ZoneOffset
-import java.time.format.DateTimeFormatter
-import java.util.Calendar
-import java.util.Date
+import java.lang.reflect.Field
+import kotlin.collections.HashMap
 
 const val TAG = "mcicishvilii"
 @AndroidEntryPoint
@@ -32,8 +24,15 @@ class AddProductFragment :
     val db = Firebase.firestore
 
 
+
     override fun viewCreated() {
 
+
+        binding.etBrand.setText("misho")
+        binding.etBoxQuantity.setText("12")
+        binding.etSku.setText("12")
+        binding.etProductName.setText("misho")
+        binding.etClientName.setText("misho")
     }
 
     override fun listeners() {
@@ -43,23 +42,24 @@ class AddProductFragment :
 
     private fun addItemtoFirestore() {
         binding.addNutton.setOnClickListener {
-            val product = Items(
-//                serverTimestamp(),
-                binding.etClientName.text.toString(),
-                binding.etBoxQuantity.text.toString().toInt(),
-                binding.etSku.text.toString(),
-                binding.etProductName.text.toString(),
-                binding.etBrand.text.toString().uppercase()
+            val product = (
+                Items(
+                    binding.etClientName.text.toString(),
+                    binding.etBoxQuantity.text.toString().toInt(),
+                    binding.etSku.text.toString(),
+                    binding.etProductName.text.toString(),
+                    binding.etBrand.text.toString().uppercase())
             )
 
-            db.collection("products").document(binding.etBrand.text.toString().uppercase())
-                .set(product)
+
+            db.collection("products").document("UIIII")
+                .update(binding.etBrand.text.toString().uppercase(),FieldValue.arrayUnion(product))
                 .addOnSuccessListener {
-                    Log.d(TAG, "DocumentSnapshot added")
+                    Toast.makeText(requireContext(), "added", Toast.LENGTH_SHORT).show()
                     findNavController().navigate(AddProductFragmentDirections.actionAddTaskFragmentToDashboardFragment())
                 }
                 .addOnFailureListener { e ->
-                    Log.w(TAG, "Error adding document", e)
+                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
                 }
         }
     }

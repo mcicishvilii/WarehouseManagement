@@ -6,46 +6,47 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
 import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
 
-class ItemsAdapter  :
-    ListAdapter<ItemsEntity, ItemsAdapter.ItemsViewHolder>(
-        NewsDiffCallBack()
+class TestAdapter  :
+    ListAdapter<Items, TestAdapter.TestViewHolder>(
+        ItemsCallback()
     ) {
 
-    private lateinit var itemClickListener: (ItemsEntity, Int) -> Unit
+//    private lateinit var itemClickListener: (ItemsEntity, Int) -> Unit
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
-    ): ItemsViewHolder {
+    ): TestViewHolder {
         val binding =
             SingleItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
-        return ItemsViewHolder(binding)
+        return TestViewHolder(binding)
     }
 
 
-    override fun onBindViewHolder(holder: ItemsViewHolder, position: Int) {
+    override fun onBindViewHolder(holder: TestViewHolder, position: Int) {
         holder.bindData()
     }
 
-    inner class ItemsViewHolder(private val binding: SingleItemLayoutBinding) :
+    inner class TestViewHolder(private val binding: SingleItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var model: ItemsEntity? = null
+        private var model: Items? = null
 
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemName.text = model?.itemName.toString()
+                binding.tvItemName.text = model?.itemName
                 binding.tvBrand.text = model?.brandName
                 binding.tvBoxQuentity.text = model?.boxNumber.toString()
                 binding.tvOrderNumber.text = model?.client
             }
-            binding.tvItemName.setOnLongClickListener {
-                itemClickListener.invoke(model!!, adapterPosition)
-                true
-            }
+//            binding.tvItemName.setOnLongClickListener {
+//                itemClickListener.invoke(model!!, adapterPosition)
+//                true
+//            }
 
 //            binding.tvItemCode.setOnClickListener {
 //                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment()
@@ -54,24 +55,24 @@ class ItemsAdapter  :
         }
     }
 
-    fun setOnItemClickListener(clickListener: (ItemsEntity, Int) -> Unit) {
-        itemClickListener = clickListener
-    }
+//    fun setOnItemClickListener(clickListener: (ItemsEntity, Int) -> Unit) {
+//        itemClickListener = clickListener
+//    }
 
 }
 
-class NewsDiffCallBack :
-    DiffUtil.ItemCallback<ItemsEntity>() {
+class ItemsCallback :
+    DiffUtil.ItemCallback<Items>() {
     override fun areItemsTheSame(
-        oldItem: ItemsEntity,
-        newItem: ItemsEntity
+        oldItem: Items,
+        newItem: Items
     ): Boolean {
-        return oldItem.itemId== newItem.itemId
+        return oldItem.code == newItem.code
     }
 
     override fun areContentsTheSame(
-        oldItem: ItemsEntity,
-        newItem: ItemsEntity
+        oldItem: Items,
+        newItem: Items
     ): Boolean {
         return oldItem == newItem
     }

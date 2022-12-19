@@ -12,8 +12,10 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.db.ItemsDao
 import com.example.warehousemanagement.data.model.Items
+import com.example.warehousemanagement.data.model.itemsList
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
 import com.example.warehousemanagement.ui.adapters.BrandsAdapter
+import com.example.warehousemanagement.ui.adapters.TestAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
@@ -31,7 +33,7 @@ import javax.inject.Inject
 class DashboardFragment :
     BaseFragment<FragmentDashboardBinding>(FragmentDashboardBinding::inflate) {
 
-    private val brandsAdapter: BrandsAdapter by lazy { BrandsAdapter() }
+    private val testAdapter: TestAdapter by lazy { TestAdapter() }
     private val vm: DashboardViewModel by viewModels()
     val db = Firebase.firestore
 
@@ -62,20 +64,32 @@ class DashboardFragment :
     }
 
     private fun getItems() {
+        setupRecycler()
+        Log.d(TAG, itemsList.toString())
 //                vm.getTasks().collect() {
 //                    brandsAdapter.submitList(it)
 //                }
+        viewLifecycleOwner.lifecycleScope.launch{
+            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
+                val database = db.collection("products")
+                database.addSnapshotListener { snapshots, e ->
+                    if (e != null) {
+                        Log.w(TAG, "Listen failed.", e)
+                        return@addSnapshotListener
+                    }
+                    if (snapshots != null) {
+                        for (snapshot in snapshots)
+                            if (snapshot != null && snapshot.exists()) {
+                                testAdapter.submitList(itemsList.toList())
+                                Log.d(TAG, "Current data: ${snapshot.data}")
+                            } else {
+                                Log.d(TAG, "Current data: null")
+                            }
+                    }
+                }
+            }
+        }
 
-        val source = Source.CACHE
-        db.collection("products").document("UIIII").get(source)
-            .addOnSuccessListener { docs ->
-                val brand = docs.toObject<Items>()
-                Log.d(TAG,brand?.brandName.toString())
-                binding.tvProductName.text = brand?.brandName.toString()
-            }
-            .addOnFailureListener { exception ->
-                Log.d(TAG, "Error getting documents.", exception)
-            }
     }
 
 //    private fun delete(){
@@ -86,17 +100,17 @@ class DashboardFragment :
 //        }
 //    }
 
-//    private fun setupRecycler() {
-//        binding.rvBrands.apply {
-//            adapter = brandsAdapter
-//            layoutManager =
-//                LinearLayoutManager(
-//                    requireContext(),
-//                    LinearLayoutManager.VERTICAL,
-//                    false
-//                )
-//        }
-//    }
+    private fun setupRecycler() {
+        binding.rvBrands.apply {
+            adapter = testAdapter
+            layoutManager =
+                LinearLayoutManager(
+                    requireContext(),
+                    LinearLayoutManager.VERTICAL,
+                    false
+                )
+        }
+    }
 
 
 }
