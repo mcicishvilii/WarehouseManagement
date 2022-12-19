@@ -42,14 +42,14 @@ class AddProductFragment :
 
     private fun addItemtoFirestore() {
         binding.addNutton.setOnClickListener {
-            val product = (
-                Items(
-                    binding.etClientName.text.toString(),
-                    binding.etBoxQuantity.text.toString().toInt(),
-                    binding.etSku.text.toString(),
-                    binding.etProductName.text.toString(),
-                    binding.etBrand.text.toString().uppercase())
-            )
+            val product:MutableMap<String,Any> = HashMap()
+            product[binding.etBrand.text.toString().uppercase()] = listOf(
+                binding.etClientName.text.toString(),
+                binding.etBoxQuantity.text.toString().toInt(),
+                binding.etSku.text.toString(),
+                binding.etProductName.text.toString(),
+                binding.etBrand.text.toString().uppercase())
+
 
 
             db.collection("products").document("UIIII")

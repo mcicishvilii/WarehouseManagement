@@ -72,17 +72,26 @@ class DashboardFragment :
         val applicationsRef = db.collection("products")
         val applicationIdRef = applicationsRef.document("UIIII")
 
-        applicationIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
-            if (task.isSuccessful) {
-                val document = task.result
-                if (document.exists()) {
-                    //This returns an ArrayList with JournalEntry Objects!
-                    val entries = document.toObject(ItemsFireStoreHolder::class.java)?.items
-                    testAdapter.submitList(entries)
-                    Log.d(TAG,entries.toString())
-                }
-            }
+        applicationIdRef.get().addOnSuccessListener {
+            Log.d(TAG,it.data.toString())
+            val list = it.toObject(Items::class.java)
+            testAdapter.submitList(list)
         }
+
+//        applicationIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+//            if (task.isSuccessful) {
+//                val document = task.result
+//                if (document.exists()) {
+//                    Log.d(TAG,document.data?.keys.toString())
+//                    //This returns an ArrayList with JournalEntry Objects!
+//                    val entries = document.toObject(ItemsFireStoreHolder::class.java)?.items
+//                    val entries1 = document.toObject(ItemsFireStoreHolder::class.java)
+//
+//                    testAdapter.submitList(entries)
+//                    Log.d(TAG,entries.toString())
+//                }
+//            }
+//        }
     }
 
 
