@@ -8,13 +8,11 @@ import java.util.*
 
 @Parcelize
 data class Items(
-//    val timeStamp:@RawValue FieldValue? = null,
-    val client:String? = null,
-    val boxNumber:Int? = null,
-    val code:String? = null,
-    val itemName:String? = null,
-    val brandName:String? = null,
+    val client:String = "",
+    val boxNumber:Int = 0,
+    val code:String = "",
+    val itemName:String = "",
+    val brandName:String = ""
 ):Parcelable
 
 
-val itemsList = mutableListOf<Items>()

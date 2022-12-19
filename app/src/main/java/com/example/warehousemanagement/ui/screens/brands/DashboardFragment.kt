@@ -12,11 +12,14 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.db.ItemsDao
 import com.example.warehousemanagement.data.model.Items
-import com.example.warehousemanagement.data.model.itemsList
+import com.example.warehousemanagement.data.model.ItemsFireStoreHolder
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
 import com.example.warehousemanagement.ui.adapters.BrandsAdapter
 import com.example.warehousemanagement.ui.adapters.TestAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
+import com.google.android.gms.tasks.Task
+import com.google.firebase.firestore.DocumentSnapshot
+import com.google.firebase.firestore.FirebaseFirestore
 import com.google.firebase.firestore.Source
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
@@ -38,7 +41,8 @@ class DashboardFragment :
     val db = Firebase.firestore
 
     override fun viewCreated() {
-        getItems()
+//        getItems()
+        readFromDB()
     }
 
     override fun listeners() {
@@ -63,34 +67,24 @@ class DashboardFragment :
         }
     }
 
-    private fun getItems() {
-        setupRecycler()
-        Log.d(TAG, itemsList.toString())
-//                vm.getTasks().collect() {
-//                    brandsAdapter.submitList(it)
-//                }
-        viewLifecycleOwner.lifecycleScope.launch{
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED){
-                val database = db.collection("products")
-                database.addSnapshotListener { snapshots, e ->
-                    if (e != null) {
-                        Log.w(TAG, "Listen failed.", e)
-                        return@addSnapshotListener
-                    }
-                    if (snapshots != null) {
-                        for (snapshot in snapshots)
-                            if (snapshot != null && snapshot.exists()) {
-                                testAdapter.submitList(itemsList.toList())
-                                Log.d(TAG, "Current data: ${snapshot.data}")
-                            } else {
-                                Log.d(TAG, "Current data: null")
-                            }
-                    }
+
+    fun readFromDB() {
+        val applicationsRef = db.collection("products")
+        val applicationIdRef = applicationsRef.document("UIIII")
+
+        applicationIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
+            if (task.isSuccessful) {
+                val document = task.result
+                if (document.exists()) {
+                    //This returns an ArrayList with JournalEntry Objects!
+                    val entries = document.toObject(ItemsFireStoreHolder::class.java)?.items
+                    testAdapter.submitList(entries)
+                    Log.d(TAG,entries.toString())
                 }
             }
         }
-
     }
+
 
 //    private fun delete(){
 //        brandsAdapter.apply {
@@ -111,6 +105,4 @@ class DashboardFragment :
                 )
         }
     }
-
-
 }
