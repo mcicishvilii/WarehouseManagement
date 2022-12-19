@@ -8,6 +8,7 @@ import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.databinding.FragmentAddProductBinding
 import com.google.firebase.firestore.FieldValue
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -15,6 +16,7 @@ import java.lang.reflect.Field
 import kotlin.collections.HashMap
 
 const val TAG = "mcicishvilii"
+
 @AndroidEntryPoint
 class AddProductFragment :
     BaseFragment<FragmentAddProductBinding>(FragmentAddProductBinding::inflate) {
@@ -22,7 +24,6 @@ class AddProductFragment :
 
     private val vm: AddProductViewModel by viewModels()
     val db = Firebase.firestore
-
 
 
     override fun viewCreated() {
@@ -36,30 +37,54 @@ class AddProductFragment :
     }
 
     override fun listeners() {
-//        addItem()
-        addItemtoFirestore()
+        testAdd()
     }
 
-    private fun addItemtoFirestore() {
+
+    private fun testAdd(){
         binding.addNutton.setOnClickListener {
-            val product:MutableMap<String,Any> = HashMap()
-            product["niko kecxoveli"] = listOf(
-                binding.etClientName.text.toString(),
-                binding.etBoxQuantity.text.toString().toInt(),
-                binding.etSku.text.toString(),
-                binding.etProductName.text.toString(),
-                binding.etBrand.text.toString().uppercase())
+            val cities = db.collection("cities")
 
+            val data1 = hashMapOf(
+                "name" to "San Francisco",
+                "state" to "CA",
+                "country" to "USA",
+                "capital" to false,
+                "population" to 860000,
+                "regions" to listOf("west_coast", "norcal")
+            )
+            cities.document("SF").set(data1)
 
-            db.collection("products").document("UIIII")
-                .update(binding.etBrand.text.toString().uppercase(),FieldValue.arrayUnion(product))
-                .addOnSuccessListener {
-                    Toast.makeText(requireContext(), "added", Toast.LENGTH_SHORT).show()
-                    findNavController().navigate(AddProductFragmentDirections.actionAddTaskFragmentToDashboardFragment())
-                }
-                .addOnFailureListener { e ->
-                    Toast.makeText(requireContext(), e.message, Toast.LENGTH_SHORT).show()
-                }
+            val data2 = hashMapOf(
+                "name" to "Los Angeles",
+                "state" to "CA",
+                "country" to "USA",
+                "capital" to false,
+                "population" to 3900000,
+                "regions" to listOf("west_coast", "socal")
+            )
+            cities.document("LA").set(data2)
+
+            val data3 = hashMapOf(
+                "name" to "Washington D.C.",
+                "state" to null,
+                "country" to "USA",
+                "capital" to true,
+                "population" to 680000,
+                "regions" to listOf("east_coast")
+            )
+            cities.document("DC").set(data3)
+
+            val data4 = hashMapOf(
+                "name" to "Tokyo",
+                "state" to null,
+                "country" to "Japan",
+                "capital" to true,
+                "population" to 9000000,
+                "regions" to listOf("kanto", "honshu")
+            )
+            cities.document("TOK").set(data4)
+
         }
     }
 }

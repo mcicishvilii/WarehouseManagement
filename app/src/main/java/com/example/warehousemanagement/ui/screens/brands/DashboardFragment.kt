@@ -18,9 +18,7 @@ import com.example.warehousemanagement.ui.adapters.BrandsAdapter
 import com.example.warehousemanagement.ui.adapters.TestAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
 import com.google.android.gms.tasks.Task
-import com.google.firebase.firestore.DocumentSnapshot
-import com.google.firebase.firestore.FirebaseFirestore
-import com.google.firebase.firestore.Source
+import com.google.firebase.firestore.*
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
@@ -40,9 +38,11 @@ class DashboardFragment :
     private val vm: DashboardViewModel by viewModels()
     val db = Firebase.firestore
 
+    val list = mutableListOf<Items>()
     override fun viewCreated() {
 //        getItems()
         readFromDB()
+
     }
 
     override fun listeners() {
@@ -69,32 +69,22 @@ class DashboardFragment :
 
 
     fun readFromDB() {
-        val applicationsRef = db.collection("products")
-        val applicationIdRef = applicationsRef.document("UIIII")
+        setupRecycler()
 
-        applicationIdRef.get().addOnSuccessListener {
-            Log.d(TAG,it.data.toString())
-
-
-            val list = it.toObject(Items::class.java)
-
-//            testAdapter.submitList(list)
+        db.collection("cities").addSnapshotListener { value, error ->
+            if (error != null) {
+                Log.d(TAG, error.message.toString())
+            }
+            for (doc: DocumentChange in value?.documentChanges!!) {
+                if (doc.type == DocumentChange.Type.ADDED) {
+                    list.add(doc.document.toObject(Items::class.java))
+                }
+            }
+            testAdapter.submitList(list)
+            Log.d(TAG,list.toString())
         }
 
-//        applicationIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->
-//            if (task.isSuccessful) {
-//                val document = task.result
-//                if (document.exists()) {
-//                    Log.d(TAG,document.data?.keys.toString())
-//                    //This returns an ArrayList with JournalEntry Objects!
-//                    val entries = document.toObject(ItemsFireStoreHolder::class.java)?.items
-//                    val entries1 = document.toObject(ItemsFireStoreHolder::class.java)
-//
-//                    testAdapter.submitList(entries)
-//                    Log.d(TAG,entries.toString())
-//                }
-//            }
-//        }
+
     }
 
 

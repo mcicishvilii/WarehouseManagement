@@ -6,13 +6,22 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import java.util.*
 
-@Parcelize
+
 data class Items(
-    val client:String = "",
-    val boxNumber:Int = 0,
-    val code:String = "",
-    val itemName:String = "",
-    val brandName:String = ""
-):Parcelable
+    val cities:Cities? = null,
+){
+    data class Cities(
+        val capital:Boolean? = null,
+        val country:String? = null,
+        val name:String? = null,
+        val population:Long? = null,
+        val regions:Regions? = null,
+        val state:String? = null
+    ){
+        data class Regions(
+            val region:String? = null
+        )
+    }
+}
 
 

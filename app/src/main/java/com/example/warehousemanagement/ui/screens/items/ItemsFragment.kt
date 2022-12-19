@@ -44,7 +44,7 @@ class ItemsFragment : BaseFragment<FragmentItemsBinding>(FragmentItemsBinding::i
             viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 val query = args.itemInfo.brandName
                 vm.getFilteredItems(query!!).collect() {
-                    itemsAdapter.submitList(it)
+//                    itemsAdapter.submitList(it)
                 }
             }
         }

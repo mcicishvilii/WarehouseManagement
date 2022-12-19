@@ -38,10 +38,7 @@ class TestAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemName.text = model?.itemName
-                binding.tvBrand.text = model?.brandName
-                binding.tvBoxQuentity.text = model?.boxNumber.toString()
-                binding.tvOrderNumber.text = model?.client
+                binding.tvItemName.text = model?.cities?.country
             }
 //            binding.tvItemName.setOnLongClickListener {
 //                itemClickListener.invoke(model!!, adapterPosition)
@@ -67,7 +64,7 @@ class ItemsCallback :
         oldItem: Items,
         newItem: Items
     ): Boolean {
-        return oldItem.code == newItem.code
+        return oldItem.cities?.country == newItem.cities?.country
     }
 
     override fun areContentsTheSame(
