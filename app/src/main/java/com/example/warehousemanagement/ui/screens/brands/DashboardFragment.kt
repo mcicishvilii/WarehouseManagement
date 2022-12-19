@@ -74,8 +74,11 @@ class DashboardFragment :
 
         applicationIdRef.get().addOnSuccessListener {
             Log.d(TAG,it.data.toString())
+
+
             val list = it.toObject(Items::class.java)
-            testAdapter.submitList(list)
+
+//            testAdapter.submitList(list)
         }
 
 //        applicationIdRef.get().addOnCompleteListener { task: Task<DocumentSnapshot> ->

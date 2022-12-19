@@ -28,10 +28,10 @@ class AddProductFragment :
     override fun viewCreated() {
 
 
-        binding.etBrand.setText("misho")
+        binding.etBrand.setText("Pianca")
         binding.etBoxQuantity.setText("12")
         binding.etSku.setText("12")
-        binding.etProductName.setText("misho")
+        binding.etProductName.setText("Skami")
         binding.etClientName.setText("misho")
     }
 
@@ -43,13 +43,12 @@ class AddProductFragment :
     private fun addItemtoFirestore() {
         binding.addNutton.setOnClickListener {
             val product:MutableMap<String,Any> = HashMap()
-            product[binding.etBrand.text.toString().uppercase()] = listOf(
+            product["niko kecxoveli"] = listOf(
                 binding.etClientName.text.toString(),
                 binding.etBoxQuantity.text.toString().toInt(),
                 binding.etSku.text.toString(),
                 binding.etProductName.text.toString(),
                 binding.etBrand.text.toString().uppercase())
-
 
 
             db.collection("products").document("UIIII")
