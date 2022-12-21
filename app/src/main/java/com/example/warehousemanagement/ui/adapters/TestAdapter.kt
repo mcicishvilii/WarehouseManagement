@@ -8,6 +8,7 @@ import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
 import com.example.warehousemanagement.data.model.Cities
 import com.example.warehousemanagement.data.model.ItemsEntity
+import com.example.warehousemanagement.databinding.SingleBrandLayoutBinding
 import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
 import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
 
@@ -22,7 +23,7 @@ class TestAdapter  :
         parent: ViewGroup, viewType: Int
     ): TestViewHolder {
         val binding =
-            SingleItemLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
+            SingleBrandLayoutBinding.inflate(LayoutInflater.from(parent.context), parent, false)
         return TestViewHolder(binding)
     }
 
@@ -31,17 +32,18 @@ class TestAdapter  :
         holder.bindData()
     }
 
-    inner class TestViewHolder(private val binding: SingleItemLayoutBinding) :
+    inner class TestViewHolder(private val binding: SingleBrandLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
         private var model: Cities? = null
 
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemName.text = model?.country
-                binding.tvBrand.text = model?.name
+                binding.tvBrandName.text = model?.country
+                binding.tvProductName.text = model?.name
+                binding.tvBoxQuanntity.text = model?.population.toString()
             }
-            binding.tvItemName.setOnLongClickListener {
+            binding.tvBrandName.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
                 true
             }

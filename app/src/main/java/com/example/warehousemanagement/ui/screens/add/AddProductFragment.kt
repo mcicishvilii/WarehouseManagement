@@ -46,14 +46,20 @@ class AddProductFragment :
 
             val cityName = binding.etClientName.text.toString()
 
+            val brand = binding.etBrand.text.toString()
+            val boxQuantity = binding.etBoxQuantity.text.toString().toLong()
+            val sku = binding.etSku.text.toString()
+            val productName = binding.etProductName.text.toString()
+            val clientName = binding.etClientName.text.toString()
+
             val city = Cities(
                 cityAbreviation = cityName,
                 false,
-                "Germany",
-                "Tbilisi",
-                1000000,
+                productName,
+                clientName,
+                boxQuantity,
                 Cities.Regions(listOf("Tbilisi","Kartli")),
-                ""
+                sku
             )
             db.collection("cities").document(cityName).set(city)
             Toast.makeText(requireContext(), "$cityName added to db", Toast.LENGTH_SHORT).show()
