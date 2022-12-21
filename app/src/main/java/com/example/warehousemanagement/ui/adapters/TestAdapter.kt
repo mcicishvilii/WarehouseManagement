@@ -16,7 +16,7 @@ class TestAdapter  :
         ItemsCallback()
     ) {
 
-//    private lateinit var itemClickListener: (ItemsEntity, Int) -> Unit
+    private lateinit var itemClickListener: (Cities, Int) -> Unit
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -39,11 +39,12 @@ class TestAdapter  :
             model = getItem(adapterPosition)
             binding.apply {
                 binding.tvItemName.text = model?.country
+                binding.tvBrand.text = model?.name
             }
-//            binding.tvItemName.setOnLongClickListener {
-//                itemClickListener.invoke(model!!, adapterPosition)
-//                true
-//            }
+            binding.tvItemName.setOnLongClickListener {
+                itemClickListener.invoke(model!!, adapterPosition)
+                true
+            }
 
 //            binding.tvItemCode.setOnClickListener {
 //                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment()
@@ -52,9 +53,9 @@ class TestAdapter  :
         }
     }
 
-//    fun setOnItemClickListener(clickListener: (ItemsEntity, Int) -> Unit) {
-//        itemClickListener = clickListener
-//    }
+    fun setOnItemClickListener(clickListener: (Cities, Int) -> Unit) {
+        itemClickListener = clickListener
+    }
 
 }
 
@@ -64,7 +65,7 @@ class ItemsCallback :
         oldItem: Cities,
         newItem: Cities
     ): Boolean {
-        return oldItem?.country == newItem?.country
+        return oldItem.country == newItem.country
     }
 
     override fun areContentsTheSame(

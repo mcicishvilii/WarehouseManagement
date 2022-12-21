@@ -47,6 +47,7 @@ class AddProductFragment :
             val cityName = binding.etClientName.text.toString()
 
             val city = Cities(
+                cityAbreviation = cityName,
                 false,
                 "Germany",
                 "Tbilisi",

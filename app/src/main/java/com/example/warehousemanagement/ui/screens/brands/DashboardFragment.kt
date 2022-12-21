@@ -41,26 +41,22 @@ class DashboardFragment :
     val list = mutableListOf<Cities>()
 
     override fun viewCreated() {
-//        getItems()
-        readFromDBWithCustomObj()
+        readFromDb()
+//        readFromDBWithCustomObj()
     }
 
     override fun listeners() {
         goToAdd()
         saveToCsv()
+        delete()
     }
 
 
     private fun saveToCsv() {
-//        viewLifecycleOwner.lifecycleScope.launch {
-//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
-//                binding.saveButton.setOnClickListener {
-
-//                    readFromDb()
-//                    vm.toCsv()
-//                }
-//            }
-//        }
+        db.collection("cities").document("KUT")
+            .delete()
+            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
     }
 
     private fun goToAdd() {
@@ -89,22 +85,34 @@ class DashboardFragment :
                 Log.d(TAG, "get failed with ", exception)
             }
     }
-//
-//    fun readFromDb(){
-//        val db = db.collection("cities").document(binding.etSearch.text.toString())
-//        db.addSnapshotListener { snapshot, e ->
-//            if (e != null) {
-//                Log.w(TAG, "Listen failed.", e)
-//                return@addSnapshotListener
-//            }
-//
-//            if (snapshot != null && snapshot.exists()) {
-//                Log.d(TAG, "Current data: ${snapshot.data?.values}")
-//            } else {
-//                Log.d(TAG, "Current data: null")
-//            }
-//        }
-//    }
+
+    fun readFromDb(){
+        setupRecycler()
+        val db = db.collection("cities")
+        db.addSnapshotListener { snapshot, e ->
+            if (e != null) {
+                Log.w(TAG, "Listen failed.", e)
+                return@addSnapshotListener
+            }
+
+            if (snapshot != null) {
+                val city = snapshot.toObjects<Cities>()
+                testAdapter.submitList(city)
+            } else {
+                Log.d(TAG, "Current data: null")
+            }
+        }
+    }
+
+    private fun delete(){
+        testAdapter.setOnItemClickListener{city,_ ->
+            db.collection("cities").document(city.cityAbreviation)
+                .delete()
+                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+        }
+    }
+
 
 
 //    private fun delete(){

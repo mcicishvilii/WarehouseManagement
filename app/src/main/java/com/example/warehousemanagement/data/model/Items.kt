@@ -8,6 +8,7 @@ import java.util.*
 
     @Parcelize
     data class Cities(
+        val cityAbreviation:String = "",
         val capital:Boolean = false,
         val country:String = "",
         val name:String = "",
