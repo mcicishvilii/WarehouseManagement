@@ -38,7 +38,7 @@ class TestAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemName.text = model?.cities?.country
+                binding.tvItemName.text = model?.cities.toString()
             }
 //            binding.tvItemName.setOnLongClickListener {
 //                itemClickListener.invoke(model!!, adapterPosition)

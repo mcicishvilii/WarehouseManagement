@@ -43,47 +43,20 @@ class AddProductFragment :
 
     private fun testAdd(){
         binding.addNutton.setOnClickListener {
-            val cities = db.collection("cities")
 
-            val data1 = hashMapOf(
-                "name" to "San Francisco",
-                "state" to "CA",
-                "country" to "USA",
-                "capital" to false,
-                "population" to 860000,
-                "regions" to listOf("west_coast", "norcal")
-            )
-            cities.document("SF").set(data1)
+            val cityName = binding.etClientName.text.toString()
 
-            val data2 = hashMapOf(
-                "name" to "Los Angeles",
-                "state" to "CA",
-                "country" to "USA",
-                "capital" to false,
-                "population" to 3900000,
-                "regions" to listOf("west_coast", "socal")
+            val city = Items.Cities(
+                false,
+                "Georgia",
+                "Tbilisi",
+                1000000,
+                Items.Cities.Regions(listOf("Tbilisi","Kartli")),
+                ""
             )
-            cities.document("LA").set(data2)
-
-            val data3 = hashMapOf(
-                "name" to "Washington D.C.",
-                "state" to null,
-                "country" to "USA",
-                "capital" to true,
-                "population" to 680000,
-                "regions" to listOf("east_coast")
-            )
-            cities.document("DC").set(data3)
-
-            val data4 = hashMapOf(
-                "name" to "Tokyo",
-                "state" to null,
-                "country" to "Japan",
-                "capital" to true,
-                "population" to 9000000,
-                "regions" to listOf("kanto", "honshu")
-            )
-            cities.document("TOK").set(data4)
+            db.collection("cities").document(cityName).set(city)
+            Toast.makeText(requireContext(), "$cityName added to db", Toast.LENGTH_SHORT).show()
+            findNavController().navigate(AddProductFragmentDirections.actionAddTaskFragmentToDashboardFragment())
 
         }
     }

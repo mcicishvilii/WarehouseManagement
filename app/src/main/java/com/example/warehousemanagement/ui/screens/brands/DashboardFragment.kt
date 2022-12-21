@@ -41,7 +41,6 @@ class DashboardFragment :
     val list = mutableListOf<Items>()
     override fun viewCreated() {
 //        getItems()
-        readFromDB()
 
     }
 
@@ -52,13 +51,14 @@ class DashboardFragment :
 
 
     private fun saveToCsv() {
-        viewLifecycleOwner.lifecycleScope.launch {
-            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
+//        viewLifecycleOwner.lifecycleScope.launch {
+//            viewLifecycleOwner.repeatOnLifecycle(Lifecycle.State.STARTED) {
                 binding.saveButton.setOnClickListener {
-                    vm.toCsv()
+                    readFromDB()
+//                    vm.toCsv()
                 }
-            }
-        }
+//            }
+//        }
     }
 
     private fun goToAdd() {
@@ -71,18 +71,20 @@ class DashboardFragment :
     fun readFromDB() {
         setupRecycler()
 
-        db.collection("cities").addSnapshotListener { value, error ->
-            if (error != null) {
-                Log.d(TAG, error.message.toString())
-            }
-            for (doc: DocumentChange in value?.documentChanges!!) {
-                if (doc.type == DocumentChange.Type.ADDED) {
-                    list.add(doc.document.toObject(Items::class.java))
+        val db = db.collection("cities").document(binding.etSearch.text.toString())
+
+        db.get()
+            .addOnSuccessListener { document ->
+                val city = document.toObject<Items>()
+                if (document != null) {
+                    Log.d(TAG, "DocumentSnapshot data: ${city?.cities?.country}")
+                } else {
+                    Log.d(TAG, "No such document")
                 }
             }
-            testAdapter.submitList(list)
-            Log.d(TAG,list.toString())
-        }
+            .addOnFailureListener { exception ->
+                Log.d(TAG, "get failed with ", exception)
+            }
 
 
     }
