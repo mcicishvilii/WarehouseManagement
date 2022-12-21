@@ -48,7 +48,7 @@ class AddProductFragment :
 
             val city = Cities(
                 false,
-                "Russia",
+                "Germany",
                 "Tbilisi",
                 1000000,
                 Cities.Regions(listOf("Tbilisi","Kartli")),

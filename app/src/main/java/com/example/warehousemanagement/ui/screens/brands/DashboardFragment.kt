@@ -12,6 +12,7 @@ import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.db.ItemsDao
 import com.example.warehousemanagement.data.model.Cities
+import com.example.warehousemanagement.data.model.ItemsFireStoreHolder
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
 import com.example.warehousemanagement.ui.adapters.BrandsAdapter
 import com.example.warehousemanagement.ui.adapters.TestAdapter
@@ -74,13 +75,11 @@ class DashboardFragment :
         val db = db.collection("cities")
         db.get()
             .addOnSuccessListener { document ->
-                val city = document.documents[3].toObject<Cities>()
+                val city = document.toObjects<Cities>()
 
                 if (document != null) {
 //                    Log.d(TAG, "DocumentSnapshot data: ${city?.regions}")
-
-                    city?.let { list.add(it) }
-                    testAdapter.submitList(list)
+                    testAdapter.submitList(city)
 
                 } else {
                     Log.d(TAG, "No such document")
