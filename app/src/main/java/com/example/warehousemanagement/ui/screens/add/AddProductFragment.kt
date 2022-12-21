@@ -5,7 +5,7 @@ import android.widget.Toast
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import com.example.warehousemanagement.common.BaseFragment
-import com.example.warehousemanagement.data.model.Items
+import com.example.warehousemanagement.data.model.Cities
 import com.example.warehousemanagement.databinding.FragmentAddProductBinding
 import com.google.firebase.firestore.FieldValue
 import com.google.firebase.firestore.SetOptions
@@ -46,12 +46,12 @@ class AddProductFragment :
 
             val cityName = binding.etClientName.text.toString()
 
-            val city = Items.Cities(
+            val city = Cities(
                 false,
-                "Georgia",
+                "Russia",
                 "Tbilisi",
                 1000000,
-                Items.Cities.Regions(listOf("Tbilisi","Kartli")),
+                Cities.Regions(listOf("Tbilisi","Kartli")),
                 ""
             )
             db.collection("cities").document(cityName).set(city)

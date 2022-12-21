@@ -6,10 +6,6 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import java.util.*
 
-@Parcelize
-data class Items(
-    val cities:Cities? = null,
-):Parcelable{
     @Parcelize
     data class Cities(
         val capital:Boolean = false,
@@ -24,6 +20,6 @@ data class Items(
             val region:List<String>? = null
         ):Parcelable
     }
-}
+
 
 
