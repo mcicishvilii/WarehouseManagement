@@ -41,7 +41,6 @@ class AddProductFragment :
     private fun testAdd(){
         binding.addNutton.setOnClickListener {
 
-
             val brand = binding.etBrandImpl.text.toString()
             val boxQuantity = binding.etBoxQuantityImpl.text.toString().toInt()
             val sku = binding.etSkuImpl.text.toString()
@@ -52,7 +51,11 @@ class AddProductFragment :
 
             val clientName = binding.etClientNameImpl.text.toString()
 
+            val calendar = Calendar.getInstance()
+            val timeStamp = calendar.timeInMillis
+
             val item = Items(
+                timestamp = timeStamp ,
                 brandAbbreviation = trimmedAbbreviation,
                 brand = brand,
                 boxQuantity = boxQuantity,

@@ -1,16 +1,21 @@
 package com.example.warehousemanagement.ui.adapters
 
+import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.warehousemanagement.common.TimeFormater
+import com.example.warehousemanagement.common.TimeFormaterIMPL
 import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.databinding.SingleBrandLayoutBinding
 import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
+import com.example.warehousemanagement.ui.screens.add.TAG
 import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
+import java.util.*
 
 class TestAdapter  :
     ListAdapter<Items, TestAdapter.TestViewHolder>(
@@ -39,8 +44,11 @@ class TestAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
+
+                val date  = model?.timestamp?.let { TimeFormaterIMPL().formatMillisToDateAndSplit(it) }
+
                 binding.tvBrandName.text = model?.brand
-                binding.tvProductName.text = model?.productName
+                binding.tvProductName.text = date
                 binding.tvBoxQuanntity.text = model?.boxQuantity.toString()
             }
             binding.tvBrandName.setOnLongClickListener {
