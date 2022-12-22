@@ -7,82 +7,201 @@
     >
 
 
-    <androidx.appcompat.widget.AppCompatEditText
-        android:id="@+id/et_client_name"
-        android:layout_width="0dp"
-        android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:background="@android:color/transparent"
-        android:hint="კლიენტი/შეკვეთა"
-        android:inputType="text"
-        android:textSize="25sp"
-        app:fontFamily="sans-serif-medium"
-        app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent" />
+<!--    <androidx.appcompat.widget.AppCompatEditText-->
+<!--        android:id="@+id/et_client_name"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:hint="კლიენტი/შეკვეთა"-->
+<!--        android:inputType="text"-->
+<!--        android:textSize="25sp"-->
+<!--        app:fontFamily="sans-serif-medium"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toTopOf="parent" />-->
 
-    <androidx.appcompat.widget.AppCompatEditText
+
+<!--    <androidx.appcompat.widget.AppCompatEditText-->
+<!--        android:id="@+id/et_box_quantity"-->
+<!--        android:layout_width="0dp"-->
+<!--        android:layout_height="wrap_content"-->
+<!--        android:layout_margin="20dp"-->
+<!--        android:gravity="top"-->
+<!--        android:background="@android:color/transparent"-->
+<!--        android:hint="ყუთების რაოდენობა"-->
+<!--        android:inputType="number"-->
+<!--        app:fontFamily="sans-serif-medium"-->
+<!--        android:textSize="25sp"-->
+<!--        app:layout_constraintEnd_toEndOf="parent"-->
+<!--        app:layout_constraintStart_toStartOf="parent"-->
+<!--        app:layout_constraintTop_toBottomOf="@+id/et_client_name"-->
+<!--        />-->
+
+
+
+    <!--    <androidx.appcompat.widget.AppCompatEditText-->
+    <!--        android:id="@+id/et_sku"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        android:gravity="top"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:hint="პროდუქტის კოდი"-->
+    <!--        android:inputType="number"-->
+    <!--        app:fontFamily="sans-serif-medium"-->
+    <!--        android:textSize="25sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_box_quantity"-->
+    <!--        />-->
+
+
+
+
+
+
+    <!--    <androidx.appcompat.widget.AppCompatEditText-->
+    <!--        android:id="@+id/et_product_name"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        android:gravity="top"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:hint="პროდუქტის სახეობა"-->
+    <!--        app:fontFamily="sans-serif-medium"-->
+    <!--        android:textSize="25sp"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_sku"-->
+    <!--        />-->
+
+
+
+
+
+    <!--    <androidx.appcompat.widget.AppCompatEditText-->
+    <!--        android:id="@+id/et_brand"-->
+    <!--        android:layout_width="0dp"-->
+    <!--        android:layout_height="wrap_content"-->
+    <!--        android:layout_margin="20dp"-->
+    <!--        android:gravity="top"-->
+    <!--        android:background="@android:color/transparent"-->
+    <!--        android:hint="ბრენდი"-->
+    <!--        app:fontFamily="sans-serif-medium"-->
+    <!--        android:textSize="25sp"-->
+    <!--        android:inputType="text"-->
+    <!--        app:layout_constraintEnd_toEndOf="parent"-->
+    <!--        app:layout_constraintStart_toStartOf="parent"-->
+    <!--        app:layout_constraintTop_toBottomOf="@+id/et_product_name"-->
+    <!--        />-->
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_box_quantity"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="top"
-        android:background="@android:color/transparent"
-        android:hint="ყუთების რაოდენობა"
-        android:inputType="number"
-        app:fontFamily="sans-serif-medium"
-        android:textSize="25sp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_client_name"
-        />
+        app:layout_constraintTop_toBottomOf="@id/et_client_name"
+        >
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_box_quantity_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="ყუთების რაოდენობა" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_client_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toTopOf="parent">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_client_name_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="კლიენტი" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_sku"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="top"
-        android:background="@android:color/transparent"
-        android:hint="პროდუქტის კოდი"
-        android:inputType="number"
-        app:fontFamily="sans-serif-medium"
-        android:textSize="25sp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_box_quantity"
-        />
+        app:layout_constraintTop_toBottomOf="@id/et_box_quantity">
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_sku_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="კოდი" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_product_name"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="top"
-        android:background="@android:color/transparent"
-        android:hint="პროდუქტის სახეობა"
-        app:fontFamily="sans-serif-medium"
-        android:textSize="25sp"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_sku"
-        />
+        app:layout_constraintTop_toBottomOf="@id/et_sku">
 
-    <androidx.appcompat.widget.AppCompatEditText
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_product_name_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="კოდი" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+    <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_brand"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
         android:layout_width="0dp"
         android:layout_height="wrap_content"
-        android:layout_margin="20dp"
-        android:gravity="top"
-        android:background="@android:color/transparent"
-        android:hint="ბრენდი"
-        app:fontFamily="sans-serif-medium"
-        android:textSize="25sp"
-        android:inputType="text"
+        android:layout_marginHorizontal="20dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_product_name"
-        />
+        app:layout_constraintTop_toBottomOf="@id/et_product_name">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_brand_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:hint="ბრენდი" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <androidx.appcompat.widget.AppCompatImageButton
 

@@ -7,20 +7,20 @@ import kotlinx.parcelize.RawValue
 import java.util.*
 
     @Parcelize
-    data class Cities(
-        val cityAbreviation:String = "",
-        val capital:Boolean = false,
-        val country:String = "",
-        val name:String = "",
-        val population:Long = 0,
-        val regions:Regions? = null,
-        val state:String = ""
-    ):Parcelable{
-        @Parcelize
-        data class Regions(
-            val region:List<String>? = null
-        ):Parcelable
-    }
+    data class Items(
+        val brandAbbreviation:String = "",
+        val brand:String = "",
+        val boxQuantity:Int = 0,
+        val sku:String = "",
+        val productName:String = "",
+        val clientName:String = "",
+    ):Parcelable
+//    {
+//        @Parcelize
+//        data class Regions(
+//            val region:List<String>? = null
+//        ):Parcelable
+//    }
 
 
 

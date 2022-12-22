@@ -60,21 +60,8 @@
         android:padding="10dp"
         android:text="ყუთები"
         app:layout_constraintEnd_toEndOf="parent"
-        app:layout_constraintTop_toTopOf="parent"
+        app:layout_constraintTop_toTopOf="parent"/>
 
-        />
-
-    <EditText
-        android:layout_width="0dp"
-        android:id="@+id/et_Search"
-        android:elevation="10dp"
-        android:layout_marginHorizontal="50dp"
-        android:layout_height="wrap_content"
-        app:layout_constraintTop_toTopOf="parent"
-        app:layout_constraintBottom_toBottomOf="parent"
-        app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintEnd_toEndOf="parent"
-        android:inputType="text" />
 
 
     <androidx.appcompat.widget.AppCompatImageButton

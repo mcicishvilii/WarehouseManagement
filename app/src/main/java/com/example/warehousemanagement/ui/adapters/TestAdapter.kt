@@ -6,18 +6,18 @@ import androidx.navigation.findNavController
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
-import com.example.warehousemanagement.data.model.Cities
+import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.databinding.SingleBrandLayoutBinding
 import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
 import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
 
 class TestAdapter  :
-    ListAdapter<Cities, TestAdapter.TestViewHolder>(
+    ListAdapter<Items, TestAdapter.TestViewHolder>(
         ItemsCallback()
     ) {
 
-    private lateinit var itemClickListener: (Cities, Int) -> Unit
+    private lateinit var itemClickListener: (Items, Int) -> Unit
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -34,14 +34,14 @@ class TestAdapter  :
 
     inner class TestViewHolder(private val binding: SingleBrandLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var model: Cities? = null
+        private var model: Items? = null
 
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvBrandName.text = model?.country
-                binding.tvProductName.text = model?.name
-                binding.tvBoxQuanntity.text = model?.population.toString()
+                binding.tvBrandName.text = model?.brand
+                binding.tvProductName.text = model?.productName
+                binding.tvBoxQuanntity.text = model?.boxQuantity.toString()
             }
             binding.tvBrandName.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
@@ -55,24 +55,24 @@ class TestAdapter  :
         }
     }
 
-    fun setOnItemClickListener(clickListener: (Cities, Int) -> Unit) {
+    fun setOnItemClickListener(clickListener: (Items, Int) -> Unit) {
         itemClickListener = clickListener
     }
 
 }
 
 class ItemsCallback :
-    DiffUtil.ItemCallback<Cities>() {
+    DiffUtil.ItemCallback<Items>() {
     override fun areItemsTheSame(
-        oldItem: Cities,
-        newItem: Cities
+        oldItem: Items,
+        newItem: Items
     ): Boolean {
-        return oldItem.country == newItem.country
+        return oldItem.brandAbbreviation == newItem.brandAbbreviation
     }
 
     override fun areContentsTheSame(
-        oldItem: Cities,
-        newItem: Cities
+        oldItem: Items,
+        newItem: Items
     ): Boolean {
         return oldItem == newItem
     }
