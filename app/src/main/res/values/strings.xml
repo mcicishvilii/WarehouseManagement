@@ -1,3 +1,25 @@
 <resources>
     <string name="app_name">WarehouseManagement</string>
+
+
+    <string-array name="coworker">
+        <item>ქეთი</item>
+        <item>მარიამი</item>
+        <item>ნია</item>
+        <item>ლიკა</item>
+        <item>თამსი</item>
+        <item>მარი</item>
+        <item>თაკო</item>
+    </string-array>
+
+
+    <string-array name="status">
+        <item>ასაღებია</item>
+        <item>აღებულია</item>
+        <item>შუალედურ საწყობშია</item>
+        <item>გამოვიდა შუალედური საწყობიდან</item>
+        <item>ბაჟდება</item>
+        <item>საწყობში გვაქვს</item>
+    </string-array>
+
 </resources>
