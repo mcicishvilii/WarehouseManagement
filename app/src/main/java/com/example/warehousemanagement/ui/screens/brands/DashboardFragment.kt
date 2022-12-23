@@ -3,6 +3,7 @@ package com.example.warehousemanagement.ui.screens.brands
 import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
+import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.model.Items
@@ -31,16 +32,13 @@ class DashboardFragment :
 
     override fun listeners() {
         goToAdd()
-        saveToCsv()
+//        saveToCsv()
         delete()
     }
 
 
     private fun saveToCsv() {
-        db.collection("cities").document("KUT")
-            .delete()
-            .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
-            .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+
     }
 
     private fun goToAdd() {
@@ -50,7 +48,7 @@ class DashboardFragment :
     }
 
     fun readFromDb(){
-        setupRecycler()
+        setupGridRecycler()
         val db = db.collection("cities")
         db.addSnapshotListener { snapshot, e ->
             if (e != null) {
@@ -69,7 +67,7 @@ class DashboardFragment :
 
     private fun delete(){
         testAdapter.setOnItemClickListener{item,_ ->
-            db.collection("cities").document(item.brandAbbreviation)
+            db.collection("cities").document(item.timestamp)
                 .delete()
                 .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
                 .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
@@ -77,13 +75,26 @@ class DashboardFragment :
     }
 
 
-    private fun setupRecycler() {
+    private fun setupLinearRecycler() {
         binding.rvBrands.apply {
             adapter = testAdapter
             layoutManager =
                 LinearLayoutManager(
                     requireContext(),
                     LinearLayoutManager.VERTICAL,
+                    false
+                )
+        }
+    }
+
+    private fun setupGridRecycler() {
+        binding.rvBrands.apply {
+            adapter = testAdapter
+            layoutManager =
+                GridLayoutManager(
+                    requireContext(),
+                    2,
+                    GridLayoutManager.VERTICAL,
                     false
                 )
         }

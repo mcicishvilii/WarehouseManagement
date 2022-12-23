@@ -15,35 +15,23 @@
         android:orientation="vertical">
 
         <TextView
-            android:id="@+id/tv_ltd"
+            android:id="@+id/tv_brand_name"
             android:layout_width="0dp"
             android:layout_margin="10dp"
             android:layout_height="wrap_content"
             android:background="@drawable/outline"
-            android:text="tu es chans daudzaxet mishos"
+            android:text="brand"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintTop_toTopOf="parent" />
 
         <TextView
-            android:id="@+id/tv_timestamp"
+            android:id="@+id/tv_productName"
             android:layout_width="0dp"
             android:layout_height="wrap_content"
             android:layout_margin="10dp"
             android:background="@drawable/outline"
-            android:text="tu es chans daudzaxet mishos"
+            android:text="produqti"
             app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_ltd" />
-
-        <TextView
-            android:id="@+id/tv_status"
-            android:layout_width="0dp"
-            android:layout_height="wrap_content"
-            android:layout_margin="10dp"
-            android:background="@drawable/outline"
-            android:text="tu es chans daudzaxet mishos"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toBottomOf="@id/tv_timestamp" />
-
-
+            app:layout_constraintTop_toBottomOf="@id/tv_brand_name" />
     </androidx.constraintlayout.widget.ConstraintLayout>
 </androidx.cardview.widget.CardView>

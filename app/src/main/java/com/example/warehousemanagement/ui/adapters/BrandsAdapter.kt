@@ -38,19 +38,19 @@ class BrandsAdapter  :
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvBrandName.text = model?.brandName
-                binding.tvBoxQuanntity.text = model?.boxNumber.toString()
-                binding.tvProductName.text = model?.itemName.toString()
+                binding.tvLtd.text = model?.brandName
+//                binding.tvBoxQuanntity.text = model?.boxNumber.toString()
+                binding.tvTimestamp.text = model?.itemName.toString()
             }
-            binding.mainLayoutBrands.setOnLongClickListener {
-                itemClickListener.invoke(model!!, adapterPosition)
-                true
-            }
-
-            binding.tvBrandName.setOnClickListener {
-                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment(model!!)
-                binding.tvBrandName.findNavController().navigate(action)
-            }
+//            binding.mainLayoutBrands.setOnLongClickListener {
+//                itemClickListener.invoke(model!!, adapterPosition)
+//                true
+//            }
+//
+//            binding.tvBrandName.setOnClickListener {
+//                val action = DashboardFragmentDirections.actionDashboardFragmentToItemsFragment(model!!)
+//                binding.tvBrandName.findNavController().navigate(action)
+//            }
         }
     }
 

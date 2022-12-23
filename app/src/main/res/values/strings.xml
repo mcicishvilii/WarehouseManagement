@@ -22,4 +22,10 @@
         <item>საწყობში გვაქვს</item>
     </string-array>
 
+    <string-array name="ltd">
+        <item>არქიდეა</item>
+        <item>სტუდიო</item>
+        <item>ლინიტი</item>
+    </string-array>
+
 </resources>

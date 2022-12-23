@@ -1,5 +1,6 @@
 package com.example.warehousemanagement.ui.screens.add
 
+import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.warehousemanagement.data.model.ItemsEntity
 import com.example.warehousemanagement.data.repository.ItemsRepositoryImpl
@@ -19,5 +20,7 @@ class AddProductViewModel @Inject constructor(
             itemsRepo.insertItem(item)
         }
     }
+
+    val selectedDate: MutableLiveData<String> = MutableLiveData()
 
 }

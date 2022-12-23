@@ -5,6 +5,9 @@
     android:layout_width="match_parent"
     android:layout_height="match_parent">
 
+
+
+
     <!-- ბრენდი -->
     <com.google.android.material.textfield.TextInputLayout
         android:id="@+id/et_brand"
@@ -81,7 +84,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="none"
-            android:text="All" />
+            android:text="ვისი შეკვეთაა" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -101,7 +104,7 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:inputType="none"
-            android:text="All" />
+            android:text="სტატუსი" />
 
     </com.google.android.material.textfield.TextInputLayout>
 
@@ -125,6 +128,30 @@
 
     </com.google.android.material.textfield.TextInputLayout>
 
+
+
+    <!-- შპს -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_ltd"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox.ExposedDropdownMenu"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/et_box_quantity">
+
+        <AutoCompleteTextView
+            android:id="@+id/et_ltd_impl"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:inputType="none"
+            android:text="ფირმა" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
     <androidx.appcompat.widget.AppCompatButton
         android:id="@+id/btn_date"
         android:layout_width="0dp"
@@ -133,7 +160,31 @@
         android:text="თარიღი"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@id/et_box_quantity" />
+        app:layout_constraintTop_toBottomOf="@id/et_ltd" />
+
+    <!-- თარიღის ედიტტექსტი -->
+    <com.google.android.material.textfield.TextInputLayout
+        android:id="@+id/et_date"
+        style="@style/Widget.MaterialComponents.TextInputLayout.OutlinedBox"
+        android:layout_width="0dp"
+        android:layout_height="wrap_content"
+        android:layout_marginHorizontal="20dp"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@id/btn_date">
+
+        <com.google.android.material.textfield.TextInputEditText
+            android:id="@+id/et_date_impl"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:background="@null"
+            android:inputType="none"
+            android:hint="" />
+
+    </com.google.android.material.textfield.TextInputLayout>
+
+
+
 
     <!-- თარიღი -->
     <!--    <com.google.android.material.textfield.TextInputLayout

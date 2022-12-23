@@ -9,20 +9,16 @@ import java.util.*
 
     @Parcelize
     data class Items(
-        val timestamp: Long = 0,
+        val ltd:String = "",
         val brandAbbreviation:String = "",
         val brand:String = "",
-        val boxQuantity:Int = 0,
-        val sku:String = "",
         val productName:String = "",
         val clientName:String = "",
+        val coworker:String = "",
+        val status:String = "",
+        val boxNumber:Int = 0,
+        val timestamp: String = "",
     ):Parcelable
-//    {
-//        @Parcelize
-//        data class Regions(
-//            val region:List<String>? = null
-//        ):Parcelable
-//    }
 
 
 
