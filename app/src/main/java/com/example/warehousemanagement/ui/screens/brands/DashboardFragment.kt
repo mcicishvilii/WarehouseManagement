@@ -4,7 +4,6 @@ import android.util.Log
 import androidx.fragment.app.viewModels
 import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
-import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.model.Date
 import com.example.warehousemanagement.data.model.Items
@@ -16,6 +15,7 @@ import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
+import kotlin.math.log
 
 
 @AndroidEntryPoint
@@ -29,6 +29,7 @@ class DashboardFragment :
 
     override fun viewCreated() {
         readFromDb()
+//        readFromDbOld()
     }
 
     override fun listeners() {
@@ -39,7 +40,7 @@ class DashboardFragment :
     }
 
 
-    private fun moveToItem(){
+    private fun moveToItem() {
         testAdapter.setOnItemClickListener { items, i ->
 //            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToItemsFragment())
         }
@@ -65,7 +66,6 @@ class DashboardFragment :
                 val city = snapshot.toObjects<Date>()
                 Log.d(TAG,city.toString())
                 testAdapter.submitList(city)
-
             } else {
                 Log.d(TAG, "Current data: null")
             }
@@ -85,7 +85,6 @@ class DashboardFragment :
 //    }
 
 
-
     private fun setupGridRecycler() {
         binding.rvBrands.apply {
             adapter = testAdapter
@@ -98,7 +97,6 @@ class DashboardFragment :
                 )
         }
     }
-
 
 
 }

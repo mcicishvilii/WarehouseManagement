@@ -95,11 +95,13 @@ private fun testAdd() {
 
         try {
             if(checkIfEmpty()) {
-//                db.collection("cities").document(timeStamp).set(item)
-
-                db
-                    .collection("products").document(timeStamp)
+                db.collection("products").document(timeStamp).set(item)
+                db.collection("products").document(timeStamp)
                     .collection(brand).document(productName).set(item)
+
+//                db
+//                    .collection("products").document(timeStamp)
+//                    .collection(brand).document(productName).set(item)
 
                 Toast.makeText(requireContext(), "$clientName added to db", Toast.LENGTH_SHORT)
                     .show()

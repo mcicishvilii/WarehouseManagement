@@ -37,7 +37,7 @@ class TestAdapter  :
             model = getItem(adapterPosition)
             binding.apply {
 
-                binding.tvLtd.text = model?.date
+                binding.tvLtd.text = model?.timestamp
 
             }
             binding.card.setOnLongClickListener {
@@ -64,7 +64,7 @@ class ItemsCallback :
         oldItem: Date,
         newItem: Date
     ): Boolean {
-        return oldItem.date == newItem.date
+        return oldItem.timestamp == newItem.timestamp
     }
 
     override fun areContentsTheSame(
