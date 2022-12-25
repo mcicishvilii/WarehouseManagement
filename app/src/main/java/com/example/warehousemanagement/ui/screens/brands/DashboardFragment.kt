@@ -27,19 +27,22 @@ class DashboardFragment :
 
     override fun viewCreated() {
         readFromDb()
-//        readFromDBWithCustomObj()
     }
 
     override fun listeners() {
+
+//        delete()
         goToAdd()
-//        saveToCsv()
-        delete()
+        moveToItem()
     }
 
 
-    private fun saveToCsv() {
-
+    private fun moveToItem(){
+        testAdapter.setOnItemClickListener { items, i ->
+//            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToItemsFragment())
+        }
     }
+
 
     private fun goToAdd() {
         binding.addNutton.setOnClickListener {
@@ -49,7 +52,7 @@ class DashboardFragment :
 
     fun readFromDb(){
         setupGridRecycler()
-        val db = db.collection("cities")
+        val db = db.collection("products")
         db.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
@@ -59,33 +62,23 @@ class DashboardFragment :
             if (snapshot != null) {
                 val city = snapshot.toObjects<Items>()
                 testAdapter.submitList(city)
+
             } else {
                 Log.d(TAG, "Current data: null")
             }
         }
     }
+//
+//    private fun delete(){
+//        testAdapter.setOnItemClickListener{item,_ ->
+//            db.collection("cities").document(item.timestamp)
+//                .delete()
+//                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
+//                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
+//        }
+//    }
 
-    private fun delete(){
-        testAdapter.setOnItemClickListener{item,_ ->
-            db.collection("cities").document(item.timestamp)
-                .delete()
-                .addOnSuccessListener { Log.d(TAG, "DocumentSnapshot successfully deleted!") }
-                .addOnFailureListener { e -> Log.w(TAG, "Error deleting document", e) }
-        }
-    }
 
-
-    private fun setupLinearRecycler() {
-        binding.rvBrands.apply {
-            adapter = testAdapter
-            layoutManager =
-                LinearLayoutManager(
-                    requireContext(),
-                    LinearLayoutManager.VERTICAL,
-                    false
-                )
-        }
-    }
 
     private fun setupGridRecycler() {
         binding.rvBrands.apply {

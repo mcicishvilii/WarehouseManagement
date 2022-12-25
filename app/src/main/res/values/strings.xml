@@ -3,29 +3,37 @@
 
 
     <string-array name="coworker">
-        <item>ქეთი</item>
-        <item>მარიამი</item>
-        <item>ნია</item>
-        <item>ლიკა</item>
-        <item>თამსი</item>
-        <item>მარი</item>
-        <item>თაკო</item>
+        <item>Katy</item>
+        <item>Marry</item>
+        <item>Nina</item>
+        <item>Lily</item>
+        <item>Nancy</item>
+        <item>Maria</item>
+        <item>Cindy</item>
     </string-array>
 
 
     <string-array name="status">
-        <item>ასაღებია</item>
-        <item>აღებულია</item>
-        <item>შუალედურ საწყობშია</item>
-        <item>გამოვიდა შუალედური საწყობიდან</item>
-        <item>ბაჟდება</item>
-        <item>საწყობში გვაქვს</item>
+
+        <item>To Pick Up</item>
+        <item>Picked Up</item>
+        <item>In a warehouse</item>
+        <item>left the warehouse</item>
+        <item>in customs</item>
+        <item>delievered</item>
+<!--        -->
+<!--        <item>ასაღებია</item>-->
+<!--        <item>აღებულია</item>-->
+<!--        <item>შუალედურ საწყობშია</item>-->
+<!--        <item>გამოვიდა შუალედური საწყობიდან</item>-->
+<!--        <item>ბაჟდება</item>-->
+<!--        <item>საწყობში გვაქვს</item>-->
     </string-array>
 
     <string-array name="ltd">
-        <item>არქიდეა</item>
-        <item>სტუდიო</item>
-        <item>ლინიტი</item>
+        <item>LTD ball</item>
+        <item>LTD triangle</item>
+        <item>LTD square</item>
     </string-array>
 
 </resources>

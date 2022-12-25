@@ -10,6 +10,7 @@ import com.example.warehousemanagement.R
 import com.example.warehousemanagement.common.BaseFragment
 import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.databinding.FragmentAddProductBinding
+import com.google.firebase.firestore.SetOptions
 import com.google.firebase.firestore.ktx.firestore
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -37,7 +38,10 @@ class AddProductFragment :
 
         binding.etBrandImpl.setText("Pianca")
         binding.etBoxQuantityImpl.setText("12")
-        binding.etProductNameImpl.setText("Skami")
+        binding.etClientNameImpl.setText("clienti")
+        binding.etCoworkerSpinner.setText("ქეთი")
+        binding.etStatusSpinner.setText("ასაღებია")
+        binding.etLtdImpl.setText("სტუდიო")
 
         setupCoworkerSpinner()
         setupStatusSpinner()
@@ -91,14 +95,21 @@ private fun testAdd() {
 
         try {
             if(checkIfEmpty()) {
-                db.collection("cities").document(timeStamp).set(item)
+//                db.collection("cities").document(timeStamp).set(item)
+
+                db
+                    .collection("products").document(timeStamp)
+                    .collection(brand).document(productName).set(item)
+
+
+
                 Toast.makeText(requireContext(), "$clientName added to db", Toast.LENGTH_SHORT)
                     .show()
                 findNavController().navigate(AddProductFragmentDirections.actionAddTaskFragmentToDashboardFragment())
             }
         }
         catch (e:Exception){
-            Toast.makeText(requireContext(), "შეავსეთ ცარიელი ველები", Toast.LENGTH_SHORT).show()
+            Toast.makeText(requireContext(), "შეავსეთ ცარიელი ველებიs", Toast.LENGTH_SHORT).show()
         }
 
 
