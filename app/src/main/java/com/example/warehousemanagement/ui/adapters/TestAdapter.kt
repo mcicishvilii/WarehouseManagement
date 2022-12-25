@@ -5,15 +5,16 @@ import android.view.ViewGroup
 import androidx.recyclerview.widget.DiffUtil
 import androidx.recyclerview.widget.ListAdapter
 import androidx.recyclerview.widget.RecyclerView
+import com.example.warehousemanagement.data.model.Date
 import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.databinding.SingleBrandLayoutBinding
 
 class TestAdapter  :
-    ListAdapter<Items, TestAdapter.TestViewHolder>(
+    ListAdapter<Date, TestAdapter.TestViewHolder>(
         ItemsCallback()
     ) {
 
-    private lateinit var itemClickListener: (Items, Int) -> Unit
+    private lateinit var itemClickListener: (Date, Int) -> Unit
 
     override fun onCreateViewHolder(
         parent: ViewGroup, viewType: Int
@@ -30,15 +31,14 @@ class TestAdapter  :
 
     inner class TestViewHolder(private val binding: SingleBrandLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var model: Items? = null
+        private var model: Date? = null
 
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
 
-                binding.tvLtd.text = model?.ltd
-                binding.tvTimestamp.text = model?.timestamp
-                binding.tvStatus.text = model?.status
+                binding.tvLtd.text = model?.date
+
             }
             binding.card.setOnLongClickListener {
                 itemClickListener.invoke(model!!, adapterPosition)
@@ -52,24 +52,24 @@ class TestAdapter  :
         }
     }
 
-    fun setOnItemClickListener(clickListener: (Items, Int) -> Unit) {
+    fun setOnItemClickListener(clickListener: (Date, Int) -> Unit) {
         itemClickListener = clickListener
     }
 
 }
 
 class ItemsCallback :
-    DiffUtil.ItemCallback<Items>() {
+    DiffUtil.ItemCallback<Date>() {
     override fun areItemsTheSame(
-        oldItem: Items,
-        newItem: Items
+        oldItem: Date,
+        newItem: Date
     ): Boolean {
-        return oldItem.brandAbbreviation == newItem.brandAbbreviation
+        return oldItem.date == newItem.date
     }
 
     override fun areContentsTheSame(
-        oldItem: Items,
-        newItem: Items
+        oldItem: Date,
+        newItem: Date
     ): Boolean {
         return oldItem == newItem
     }

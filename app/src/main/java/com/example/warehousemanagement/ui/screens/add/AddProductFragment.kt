@@ -101,8 +101,6 @@ private fun testAdd() {
                     .collection("products").document(timeStamp)
                     .collection(brand).document(productName).set(item)
 
-
-
                 Toast.makeText(requireContext(), "$clientName added to db", Toast.LENGTH_SHORT)
                     .show()
                 findNavController().navigate(AddProductFragmentDirections.actionAddTaskFragmentToDashboardFragment())
@@ -115,6 +113,7 @@ private fun testAdd() {
 
     }
 }
+
 
     private fun checkIfEmpty():Boolean{
         binding.apply {

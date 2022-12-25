@@ -24,7 +24,7 @@
         tools:layout="@layout/fragment_items" >
         <argument
             android:name="itemInfo"
-            app:argType="com.example.warehousemanagement.data.model.ItemsEntity" />
+            app:argType="string" />
     </fragment>
     <fragment
         android:id="@+id/addTaskFragment"

@@ -6,11 +6,13 @@ import androidx.navigation.fragment.findNavController
 import androidx.recyclerview.widget.GridLayoutManager
 import androidx.recyclerview.widget.LinearLayoutManager
 import com.example.warehousemanagement.common.BaseFragment
+import com.example.warehousemanagement.data.model.Date
 import com.example.warehousemanagement.data.model.Items
 import com.example.warehousemanagement.databinding.FragmentDashboardBinding
 import com.example.warehousemanagement.ui.adapters.TestAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -60,7 +62,8 @@ class DashboardFragment :
             }
 
             if (snapshot != null) {
-                val city = snapshot.toObjects<Items>()
+                val city = snapshot.toObjects<Date>()
+                Log.d(TAG,city.toString())
                 testAdapter.submitList(city)
 
             } else {
@@ -68,6 +71,9 @@ class DashboardFragment :
             }
         }
     }
+
+
+
 //
 //    private fun delete(){
 //        testAdapter.setOnItemClickListener{item,_ ->
@@ -92,4 +98,7 @@ class DashboardFragment :
                 )
         }
     }
+
+
+
 }
