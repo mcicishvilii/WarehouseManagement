@@ -42,7 +42,7 @@ class DashboardFragment :
 
     private fun moveToItem() {
         testAdapter.setOnItemClickListener { items, i ->
-//            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToItemsFragment())
+            findNavController().navigate(DashboardFragmentDirections.actionDashboardFragmentToItemsFragment(items.timestamp))
         }
     }
 

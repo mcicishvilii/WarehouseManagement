@@ -7,7 +7,7 @@ import kotlinx.parcelize.Parcelize
 import kotlinx.parcelize.RawValue
 import java.util.*
 
-    @Parcelize
+
     data class Items(
         val ltd:String = "",
         val brandAbbreviation:String = "",
@@ -18,7 +18,8 @@ import java.util.*
         val status:String = "",
         val boxNumber:Int = 0,
         val timestamp: String = "",
-    ):Parcelable
+        val misho: MutableList<String> = mutableListOf(),
+    )
 
 
 

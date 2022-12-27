@@ -90,14 +90,16 @@ private fun testAdd() {
             coworker = coworker,
             status = status,
             boxNumber = boxQuantity,
-            timestamp = timeStamp
+            timestamp = timeStamp,
+            misho = mutableListOf(productName)
         )
+
+
 
         try {
             if(checkIfEmpty()) {
                 db.collection("products").document(timeStamp).set(item)
-                db.collection("products").document(timeStamp)
-                    .collection(brand).document(productName).set(item)
+                db.collection("products").document(timeStamp).collection(brand).document(productName).set(item)
 
 //                db
 //                    .collection("products").document(timeStamp)

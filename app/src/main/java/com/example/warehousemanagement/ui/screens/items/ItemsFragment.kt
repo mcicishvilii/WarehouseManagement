@@ -23,6 +23,7 @@ import com.example.warehousemanagement.ui.adapters.ItemsAdapter
 import com.example.warehousemanagement.ui.screens.add.TAG
 import com.example.warehousemanagement.ui.screens.brands.DashboardViewModel
 import com.google.firebase.firestore.ktx.firestore
+import com.google.firebase.firestore.ktx.toObject
 import com.google.firebase.firestore.ktx.toObjects
 import com.google.firebase.ktx.Firebase
 import dagger.hilt.android.AndroidEntryPoint
@@ -30,6 +31,7 @@ import kotlinx.coroutines.launch
 
 @AndroidEntryPoint
 class ItemsFragment : BaseFragment<FragmentItemsBinding>(FragmentItemsBinding::inflate) {
+
 
     val args:ItemsFragmentArgs by navArgs()
 
@@ -49,15 +51,16 @@ class ItemsFragment : BaseFragment<FragmentItemsBinding>(FragmentItemsBinding::i
 
     fun readFromNestedDb(){
         setupRecycler()
-        val db = db.collection("products").document("26-12-2022").collection("Pianca")
+        val db = db.collection("products").document(args.itemInfo)
         db.addSnapshotListener { snapshot, e ->
             if (e != null) {
                 Log.w(TAG, "Listen failed.", e)
                 return@addSnapshotListener
             }
             if (snapshot != null) {
-                val city = snapshot.toObjects<Items>()
-                itemsAdapter.submitList(city)
+                val city = snapshot.toObject<Items>()
+                Log.d(TAG,city?.misho.toString())
+                itemsAdapter.submitList(city?.misho)
 
             } else {
                 Log.d(TAG, "Current data: null")

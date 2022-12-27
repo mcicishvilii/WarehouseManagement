@@ -12,7 +12,7 @@ import com.example.warehousemanagement.databinding.SingleItemLayoutBinding
 import com.example.warehousemanagement.ui.screens.brands.DashboardFragmentDirections
 
 class ItemsAdapter  :
-    ListAdapter<Items, ItemsAdapter.ItemsViewHolder>(
+    ListAdapter<String, ItemsAdapter.ItemsViewHolder>(
         NewsDiffCallBack()
     ) {
 
@@ -33,12 +33,20 @@ class ItemsAdapter  :
 
     inner class ItemsViewHolder(private val binding: SingleItemLayoutBinding) :
         RecyclerView.ViewHolder(binding.root) {
-        private var model: Items? = null
+        private var model: String? = null
 
         fun bindData() {
             model = getItem(adapterPosition)
             binding.apply {
-                binding.tvItemName.text = model?.status
+                binding.tvItemName.text = model
+//                binding.tvBrand.text = model?.brand
+//                binding.tvBoxQuentity.text = model?.boxNumber.toString()
+//                binding.tvOrderNumber.text = model?.clientName
+//
+//                binding.tvTimestamp.text = model?.timestamp
+//                binding.tvCoworker.text = model?.coworker
+//                binding.tvProductName.text = model?.productName
+//                binding.tvLtd.text = model?.ltd
             }
 //            binding.tvItemName.setOnLongClickListener {
 //                itemClickListener.invoke(model!!, adapterPosition)
@@ -59,17 +67,17 @@ class ItemsAdapter  :
 }
 
 class NewsDiffCallBack :
-    DiffUtil.ItemCallback<Items>() {
+    DiffUtil.ItemCallback<String>() {
     override fun areItemsTheSame(
-        oldItem: Items,
-        newItem: Items
+        oldItem: String,
+        newItem: String
     ): Boolean {
-        return oldItem.productName== newItem.productName
+        return oldItem == newItem
     }
 
     override fun areContentsTheSame(
-        oldItem: Items,
-        newItem: Items
+        oldItem: String,
+        newItem: String
     ): Boolean {
         return oldItem == newItem
     }
